@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<colors>
+
+	<data>
+
+	<row>
+		<id>10</id>
+		<name>сиреневый</name>
+		<hash>#D3B2D1</hash>
+	</row>
+
+	<row>
+		<id>11</id>
+		<name>желтый</name>
+		<hash>#ffcc00</hash>
+	</row>
+
+	<row>
+		<id>12</id>
+		<name>коричневый</name>
+		<hash>#5c3416</hash>
+	</row>
+
+	<row>
+		<id>13</id>
+		<name>зеленый</name>
+		<hash>#265e18</hash>
+	</row>
+
+	<row>
+		<id>14</id>
+		<name>серый</name>
+		<hash>#5c5c5c</hash>
+	</row>
+
+	<row>
+		<id>15</id>
+		<name>фиолетовый</name>
+		<hash>#6e066e</hash>
+	</row>
+
+	<row>
+		<id>16</id>
+		<name>черный</name>
+		<hash>#000000</hash>
+	</row>
+
+	<row>
+		<id>17</id>
+		<name>мультицвет</name>
+		<hash>multi</hash>
+	</row>
+
+	</data>
+
+</colors>

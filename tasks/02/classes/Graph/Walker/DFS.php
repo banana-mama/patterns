@@ -12,11 +12,9 @@ class DFS extends Strategy
 
 
   /**
-   * @param  Graph  $graph
-   *
    * @return array
    */
-  public function walk(Graph $graph): array
+  public function walk(): array
   {
 
     // TODO
@@ -27,11 +25,13 @@ class DFS extends Strategy
 
 
   /**
+   * @param  Graph  $graph
+   *
    * @return Iterator
    */
-  protected function getStrategyIterator(): Iterator
+  protected function getStrategyIterator(Graph $graph): Iterator
   {
-    return new DFSiterator();
+    return new DFSiterator($graph);
   }
 
 

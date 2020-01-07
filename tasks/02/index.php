@@ -40,8 +40,8 @@ $tree = [
 $graph = new Graph();
 $graph->injectTree($tree);
 
-$walker = new Walker(new BFS(), $graph);
-//$walker = new Walker(new DFS(), $graph);
+$walker = new Walker(new BFS($graph));
+//$walker = new Walker(new DFS($graph));
 
 $list = $walker->walk()->getList();
 

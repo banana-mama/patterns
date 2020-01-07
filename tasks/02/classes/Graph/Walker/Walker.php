@@ -21,11 +21,6 @@ class Walker
   private $strategy = null;
 
   /**
-   * @var null|Graph $graph
-   */
-  private $graph = null;
-
-  /**
    * @var null|array $list
    */
   private $list = null;
@@ -35,12 +30,10 @@ class Walker
    * Colors constructor.
    *
    * @param  Strategy  $strategy
-   * @param  Graph     $graph
    */
-  function __construct(Strategy $strategy, ?Graph $graph = null)
+  function __construct(Strategy $strategy)
   {
     $this->setStrategy($strategy);
-    if ($graph) $this->setGraph($graph);
   }
 
 
@@ -79,20 +72,8 @@ class Walker
    */
   public function walk(): self
   {
-
-    $graph = $this->getGraph();
-    if ($graph) $this->list = $this->strategy->walk($graph);
-
+    $this->list = $this->strategy->walk();
     return $this;
-  }
-
-
-  /**
-   * @return null|Graph
-   */
-  private function getGraph()
-  {
-    return $this->graph;
   }
 
 

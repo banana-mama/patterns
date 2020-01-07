@@ -12,7 +12,7 @@ class DFS extends Iterator
   /**
    * @return bool
    */
-  protected function hasNext(): bool
+  public function hasNext(): bool
   {
     return false;
   }
@@ -21,7 +21,7 @@ class DFS extends Iterator
   /**
    * @return Node
    */
-  protected function getNext(): Node
+  public function getNext(): Node
   {
     return new Node(1);
   }

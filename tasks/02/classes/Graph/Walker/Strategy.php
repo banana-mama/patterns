@@ -19,10 +19,12 @@ abstract class Strategy
 
   /**
    * Strategy constructor.
+   *
+   * @param  Graph  $graph
    */
-  function __construct()
+  function __construct(Graph $graph)
   {
-    $this->iterator = $this->getStrategyIterator();
+    $this->iterator = $this->getStrategyIterator($graph);
   }
 
 
@@ -30,14 +32,13 @@ abstract class Strategy
 
 
   /**
-   * @param  Graph  $graph
-   *
    * @return array
    */
-  public function walk(Graph $graph): array {
+  public function walk(): array
+  {
     $list = [];
 
-    while($this->iterator->hasNext()) {
+    while ($this->iterator->hasNext()) {
       $list[] = $this->iterator->getNext();
     }
 
@@ -64,9 +65,11 @@ abstract class Strategy
 
 
   /**
+   * @param  Graph  $graph
+   *
    * @return Iterator
    */
-  abstract protected function getStrategyIterator(): Iterator;
+  abstract protected function getStrategyIterator(Graph $graph): Iterator;
 
 
 }

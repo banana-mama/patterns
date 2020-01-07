@@ -46,18 +46,6 @@ abstract class Strategy
   }
 
 
-  ### private
-
-
-  /**
-   * @return Iterator
-   */
-  private function getIterator(): Iterator
-  {
-    return $this->iterator;
-  }
-
-
   ### abstract
 
 

@@ -47,15 +47,6 @@ class Walker
 
 
   /**
-   * @param  Graph  $graph
-   */
-  public function setGraph(Graph $graph)
-  {
-    $this->graph = $graph;
-  }
-
-
-  /**
    * @param  boolean  $asString
    *
    * @return array|string

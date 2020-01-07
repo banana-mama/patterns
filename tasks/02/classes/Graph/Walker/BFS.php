@@ -12,19 +12,6 @@ class BFS extends Strategy
 
 
   /**
-   * @return array
-   */
-  public function walk(): array
-  {
-
-    // TODO
-
-    return [];
-
-  }
-
-
-  /**
    * @param  Graph  $graph
    *
    * @return Iterator

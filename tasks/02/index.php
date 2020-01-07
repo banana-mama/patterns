@@ -8,17 +8,17 @@ spl_autoload_register(function ($class) {
   include(DOCROOT . $fullPath . '.php');
 });
 
+use classes\Graph\Graph;
+
 
 ###
 
 
-$graph = [
+$tree = [
   2 => [
 
     7 => [
-      2 => [
-
-      ],
+      2 => [],
       6 => [
         5 => [],
         11 => []
@@ -29,10 +29,12 @@ $graph = [
       9 => [
         4 => []
       ]
-    ],
+    ]
 
   ]
 ];
 
-phpinfo();
+$graph = new Graph();
+$graph->injectTree($tree);
+
 exit();

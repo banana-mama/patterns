@@ -1,6 +1,6 @@
 <?php
 
-namespace classes;
+namespace classes\Graph;
 
 
 class Graph
@@ -21,6 +21,19 @@ class Graph
   function __construct(?Node $rootNode = null)
   {
     $this->root = $rootNode;
+  }
+
+
+  /**
+   * @param  array  $tree
+   *
+   * @return void
+   */
+  public function injectTree(array $tree): void
+  {
+    $rootNode = new Node(key($tree));
+    if (current($tree)) $rootNode->injectChilds(current($tree));
+    $this->setRoot($rootNode);
   }
 
 

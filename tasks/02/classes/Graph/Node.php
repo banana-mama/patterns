@@ -1,7 +1,7 @@
 <?php
 
 
-namespace classes;
+namespace classes\Graph;
 
 
 class Node
@@ -39,6 +39,26 @@ class Node
   function __toString(): string
   {
     return (string)$this->value;
+  }
+
+
+  /**
+   * @param  array  $tree
+   *
+   * @return void
+   */
+  public function injectChilds(array $tree): void
+  {
+    foreach ($tree as $value => $childs) {
+      if (count(array_filter($this->childs)) === count($this->childs)) break;
+
+      $node = new Node($value);
+      if ($childs) $node->injectChilds($childs);
+
+      $side = (!!$this->getChild('left') ? 'right' : 'left');
+      $this->setChild($node, $side);
+
+    }
   }
 
 

@@ -56,7 +56,7 @@ class Node
       if ($childs) $node->injectChilds($childs);
 
       $side = (!!$this->getChild('left') ? 'right' : 'left');
-      $this->setChild($node, $side);
+      if (!!$this->getChild($side) === false) $this->setChild($node, $side);
 
     }
   }

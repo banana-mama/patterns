@@ -9,6 +9,9 @@ spl_autoload_register(function ($class) {
 });
 
 use classes\Graph\Graph;
+use classes\Graph\Walker\Walker;
+use classes\Graph\Walker\BFS;
+use classes\Graph\Walker\DFS;
 
 
 ###
@@ -36,5 +39,12 @@ $tree = [
 
 $graph = new Graph();
 $graph->injectTree($tree);
+
+echo '<pre>';
+print_r($graph);
+echo '</pre>';
+
+$walker = new Walker(new BFS(), $graph);
+//$walker = new Walker(new DFS(), $graph);
 
 exit();

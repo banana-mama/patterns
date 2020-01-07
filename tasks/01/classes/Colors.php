@@ -10,7 +10,7 @@ class Colors
 
 
   /**
-   * @var Parser $strategy
+   * @var null|Parser $strategy
    */
   private $strategy = null;
 

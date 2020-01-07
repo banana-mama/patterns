@@ -14,6 +14,17 @@ class Graph
 
 
   /**
+   * Graph constructor.
+   *
+   * @param  null|Node  $rootNode
+   */
+  function __construct(?Node $rootNode = null)
+  {
+    $this->root = $rootNode;
+  }
+
+
+  /**
    * @param  Node  $rootNode
    *
    * @return void

@@ -9,12 +9,37 @@ class Node
 
 
   /**
+   * @var null|integer $value
+   */
+  private $value = null;
+
+  /**
    * @var null[]|Node[] $childs
    */
   private $childs = [
     'left' => null,
     'right' => null
   ];
+
+
+  /**
+   * Node constructor.
+   *
+   * @param  int  $value
+   */
+  function __construct(int $value)
+  {
+    $this->value = $value;
+  }
+
+
+  /**
+   * @return string
+   */
+  function __toString(): string
+  {
+    return (string)$this->value;
+  }
 
 
   /**

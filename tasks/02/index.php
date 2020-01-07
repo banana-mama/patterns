@@ -1,5 +1,17 @@
 <?php
 
+
+define('DOCROOT', ($_SERVER['DOCUMENT_ROOT'] . '/tasks/02/'));
+
+spl_autoload_register(function ($class) {
+  $fullPath = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+  include(DOCROOT . $fullPath . '.php');
+});
+
+
+###
+
+
 $graph = [
   2 => [
 

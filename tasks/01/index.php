@@ -1,7 +1,5 @@
 <?php
 
-###
-
 
 define('DOCROOT', ($_SERVER['DOCUMENT_ROOT'] . '/tasks/01/'));
 

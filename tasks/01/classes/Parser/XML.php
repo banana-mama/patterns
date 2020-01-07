@@ -39,15 +39,33 @@ class XML extends Parser
   /**
    * @param  mixed  $row
    *
-   * @return array
+   * @return integer
    */
-  protected function extractColorData($row): array
+  protected function getColorID($row): int
   {
-    return [
-      'id' => (string) $row->id,
-      'name' => (string) $row->name,
-      'hex' => (string) $row->hash
-    ];
+    return (integer)$row->id;
+  }
+
+
+  /**
+   * @param  mixed  $row
+   *
+   * @return string
+   */
+  protected function getColorName($row): string
+  {
+    return (string)$row->name;
+  }
+
+
+  /**
+   * @param  mixed  $row
+   *
+   * @return string
+   */
+  protected function getColorHEX($row): string
+  {
+    return (string)$row->hash;
   }
 
 

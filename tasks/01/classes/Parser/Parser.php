@@ -7,6 +7,9 @@ abstract class Parser
 {
 
 
+  // TODO: getID, getName, getHEX methods
+
+
   /**
    * @var string FEEDS_PATH
    */
@@ -63,6 +66,21 @@ abstract class Parser
   }
 
 
+  /**
+   * @param  mixed  $row
+   *
+   * @return array
+   */
+  private function extractColorData($row): array
+  {
+    return [
+      'id' => $this->getColorID($row),
+      'name' => $this->getColorName($row),
+      'hex' => $this->getColorHEX($row)
+    ];
+  }
+
+
   ### abstract
 
 
@@ -93,9 +111,25 @@ abstract class Parser
   /**
    * @param  mixed  $row
    *
-   * @return array
+   * @return integer
    */
-  abstract protected function extractColorData($row): array;
+  abstract protected function getColorID($row): int;
+
+
+  /**
+   * @param  mixed  $row
+   *
+   * @return string
+   */
+  abstract protected function getColorName($row): string;
+
+
+  /**
+   * @param  mixed  $row
+   *
+   * @return string
+   */
+  abstract protected function getColorHEX($row): string;
 
 
 }

@@ -51,15 +51,33 @@ class CSV extends Parser
   /**
    * @param  mixed  $row
    *
-   * @return array
+   * @return integer
    */
-  protected function extractColorData($row): array
+  protected function getColorID($row): int
   {
-    return [
-      'id' => $row[0],
-      'name' => $row[1],
-      'hex' => $row[2]
-    ];
+    return $row[0];
+  }
+
+
+  /**
+   * @param  mixed  $row
+   *
+   * @return string
+   */
+  protected function getColorName($row): string
+  {
+    return $row[1];
+  }
+
+
+  /**
+   * @param  mixed  $row
+   *
+   * @return string
+   */
+  protected function getColorHEX($row): string
+  {
+    return $row[2];
   }
 
 

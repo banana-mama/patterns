@@ -11,6 +11,11 @@ class Walker
 
 
   /**
+   * @var integer MAX_NODES
+   */
+  const MAX_NODES = 10;
+
+  /**
    * @var null|Strategy $strategy
    */
   private $strategy = null;
@@ -58,16 +63,6 @@ class Walker
 
 
   /**
-   * @return $this
-   */
-  public function walk(): self
-  {
-    $this->list = $this->strategy->walk();
-    return $this;
-  }
-
-
-  /**
    * @param  boolean  $asString
    *
    * @return array|string
@@ -76,6 +71,28 @@ class Walker
   {
     if ($asString) return ($this->list ? implode(', ', $this->list) : '');
     else return ($this->list ?? []);
+  }
+
+
+  /**
+   * @return $this
+   */
+  public function walk(): self
+  {
+
+    $graph = $this->getGraph();
+    if ($graph) $this->list = $this->strategy->walk($graph);
+
+    return $this;
+  }
+
+
+  /**
+   * @return null|Graph
+   */
+  private function getGraph()
+  {
+    return $this->graph;
   }
 
 

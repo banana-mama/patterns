@@ -40,11 +40,21 @@ $tree = [
 $graph = new Graph();
 $graph->injectTree($tree);
 
+$walker = new Walker(new BFS(), $graph);
+//$walker = new Walker(new DFS(), $graph);
+
+$list = $walker->walk()->getList();
+
+
+###
+
+
+echo '<pre>';
+print_r($list);
+echo '</pre>';
+
 echo '<pre>';
 print_r($graph);
 echo '</pre>';
-
-$walker = new Walker(new BFS(), $graph);
-//$walker = new Walker(new DFS(), $graph);
 
 exit();

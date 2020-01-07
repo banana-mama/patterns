@@ -7,9 +7,6 @@ abstract class Parser
 {
 
 
-  // TODO: getID, getName, getHEX methods
-
-
   /**
    * @var string FEEDS_PATH
    */

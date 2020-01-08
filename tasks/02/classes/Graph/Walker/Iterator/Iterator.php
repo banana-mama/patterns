@@ -10,10 +10,26 @@ abstract class Iterator
 {
 
 
+  ### properties
+
+
+  /**
+   * @var null|integer $next
+   */
+  protected $next = null;
+
+  /**
+   * @var null|Node $currentNode
+   */
+  protected $currentNode = null;
+
   /**
    * @var null|Graph $graph
    */
   protected $graph = null;
+
+
+  ### methods
 
 
   /**
@@ -24,19 +40,55 @@ abstract class Iterator
   public function __construct(Graph $graph)
   {
     $this->graph = $graph;
+    $graphRootNode = $this->graph->getRoot();
+    if ($graphRootNode) $this->setNodeAsNext($graphRootNode);
+  }
+
+
+  /**
+   * @return null|integer
+   */
+  public function getNext(): ?int
+  {
+    $result = null;
+    if ($this->hasNext()) {
+      $result = $this->next;
+      $this->setNext($this->currentNode);
+    }
+    return $result;
   }
 
 
   /**
    * @return bool
    */
-  abstract public function hasNext(): bool;
+  public function hasNext(): bool
+  {
+    return is_numeric($this->next);
+  }
 
 
   /**
-   * @return null|integer
+   * @param  Node  $node
+   *
+   * @return void
    */
-  abstract public function getNext(): ?int;
+  protected function setNodeAsNext(Node $node): void {
+    $this->currentNode = $node;
+    $this->currentNode->setAsVisited();
+    $this->next = $this->currentNode->getValue();
+  }
+
+
+  ### abstract
+
+
+  /**
+   * @param  Node  $node
+   *
+   * @return void
+   */
+  abstract protected function setNext(Node $node): void;
 
 
 }

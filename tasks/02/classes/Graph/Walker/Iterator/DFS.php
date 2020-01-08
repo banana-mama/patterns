@@ -10,63 +10,10 @@ class DFS extends Iterator
 {
 
 
-  ### properties
-
-
-  /**
-   * @var null|integer $next
-   */
-  private $next = null;
-
-  /**
-   * @var null|Node $currentNode
-   */
-  private $currentNode = null;
-
-
   ### methods
 
 
-  /**
-   * DFS constructor.
-   *
-   * @param  Graph  $graph
-   */
-  function __construct(Graph $graph)
-  {
-
-    parent::__construct($graph);
-
-    $graphRootNode = $this->graph->getRoot();
-    if ($graphRootNode) $this->setNodeAsNext($graphRootNode);
-
-  }
-
-
-  /**
-   * @return bool
-   */
-  public function hasNext(): bool
-  {
-    return is_numeric($this->next);
-  }
-
-
-  /**
-   * @return null|integer
-   */
-  public function getNext(): ?int
-  {
-    $result = null;
-    if ($this->hasNext()) {
-      $result = $this->next;
-      $this->setNext($this->currentNode);
-    }
-    return $result;
-  }
-
-
-  ### private
+  # protected
 
 
   /**
@@ -74,7 +21,7 @@ class DFS extends Iterator
    *
    * @return void
    */
-  private function setNext(Node $node): void
+  protected function setNext(Node $node): void
   {
 
     # если имеются потомки - проверяем, были ли они уже посещены
@@ -104,19 +51,6 @@ class DFS extends Iterator
     }
     ###
 
-  }
-
-
-  /**
-   * @param  Node  $node
-   *
-   * @return void
-   */
-  private function setNodeAsNext(Node $node): void
-  {
-    $this->currentNode = $node;
-    $this->currentNode->setAsVisited();
-    $this->next = $this->currentNode->getValue();
   }
 
 

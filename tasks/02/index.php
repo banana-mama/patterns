@@ -40,8 +40,8 @@ $tree = [
 $graph = new Graph();
 $graph->injectTree($tree);
 
-//$walker = new Walker(new DFS($graph)); ### в глубину (DFS)
-$walker = new Walker(new BFS($graph)); ### в ширину (BFS)
+$walker = new Walker(new DFS($graph)); ### в глубину (DFS)
+//$walker = new Walker(new BFS($graph)); ### в ширину (BFS)
 
 $list = $walker->walk()->getList();
 
@@ -49,12 +49,12 @@ $list = $walker->walk()->getList();
 ###
 
 
-echo '<pre>';
-print_r($list);
-echo '</pre>';
-
 //echo '<pre>';
 //print_r($graph);
 //echo '</pre>';
+
+echo '<pre>';
+print_r($list);
+echo '</pre>';
 
 exit();

@@ -18,7 +18,7 @@ abstract class Subscriber
   /**
    * @var string SUBSCRIBERS_PATH
    */
-  const SUBSCRIBERS_PATH = (DOCROOT . self::SUBSCRIBERS_FOLDER);
+  const SUBSCRIBERS_PATH = (DOCROOT . self::SUBSCRIBERS_FOLDER . DIRECTORY_SEPARATOR);
 
   /**
    * @var null|string $fileName
@@ -47,12 +47,16 @@ abstract class Subscriber
   /**
    * Subscriber constructor.
    *
-   * @param  string  $fileFullName
+   * @param  string  $fileName
    */
-  function __construct(string $fileFullName)
+  function __construct(string $fileName)
   {
-    $this->fileFullName = $fileFullName;
-    $this->key = $this->fileName = pathinfo($this->fileFullName, PATHINFO_FILENAME);
+
+    $this->key = $this->fileName = $fileName;
+    $this->fileFullName = ($this->fileName . '.txt');
+
+    $this->clearFile();
+
   }
 
 
@@ -84,6 +88,17 @@ abstract class Subscriber
 
 
   /**
+   * @param  Publisher[]  $publishers
+   *
+   * @return void
+   */
+  public function subscribeToAll(array $publishers): void
+  {
+    foreach ($publishers as $publisher) $this->subscribeTo($publisher);
+  }
+
+
+  /**
    * @param  Publisher  $publisher
    *
    * @return void
@@ -95,6 +110,40 @@ abstract class Subscriber
   }
 
 
+  /**
+   * @return void
+   */
+  public function unsubscribeToAll(): void
+  {
+    foreach ($this->publishers as $publisher) $this->unsubscribeFrom($publisher);
+  }
+
+
+  # protected
+
+
+  /**
+   * @return string
+   */
+  protected function getFilePath(): string
+  {
+    return (self::SUBSCRIBERS_PATH . $this->fileFullName);
+  }
+
+
+  # private
+
+
+  /**
+   * @return void
+   */
+  private function clearFile(): void
+  {
+    $fp = fopen($this->getFilePath(), 'w');
+    fclose($fp);
+  }
+
+
   ### abstract
 
 
@@ -103,7 +152,7 @@ abstract class Subscriber
    *
    * @return void
    */
-  abstract public function receive(string $text): void;
+  abstract public function read(string $text): void;
 
 
 }

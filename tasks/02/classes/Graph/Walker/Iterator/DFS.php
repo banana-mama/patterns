@@ -46,8 +46,13 @@ class DFS extends Iterator
     # если на текущем узле делать больше нечего - возвращаемся к родителю
     # (данный узел уже исключен из дальнейшей проверки)
     if (isset($toParent) && $toParent) {
+
+      $text = ('Узел \'' . $node->getValue() . '\' не имеет потомков!');
+      $this->publish($text);
+
       if ($node->hasParent()) $this->setNext($node->getParent());
       else $this->next = null;
+
     }
     ###
 

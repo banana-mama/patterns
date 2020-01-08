@@ -15,9 +15,15 @@ class Subscriber extends SubscriberInterface
    *
    * @return void
    */
-  public function receive(string $text): void
+  public function read(string $text): void
   {
-    // TODO: custom logic
+
+    $text = ('[' . date('d.m.Y H:i:s') . '] ' . $text . PHP_EOL);
+
+    $fp = fopen($this->getFilePath(), 'a');
+    fwrite($fp, $text);
+    fclose($fp);
+
   }
 
 

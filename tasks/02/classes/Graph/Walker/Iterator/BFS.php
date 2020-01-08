@@ -44,13 +44,19 @@ class BFS extends Iterator
    */
   protected function setNodeAsNext(Node $node): void
   {
-
     parent::setNodeAsNext($node);
+    if ($this->currentNode->hasChilds()) {
 
-    if ($this->currentNode->hasChilds())
-      foreach ($this->currentNode->getChilds() as $child)
+      foreach ($this->currentNode->getChilds() as $child) {
         $this->queue[] = $child;
+      }
 
+    } else {
+
+      $text = ('Узел \'' . $this->currentNode->getValue() . '\' не имеет потомков!');
+      $this->publish($text);
+
+    }
   }
 
 

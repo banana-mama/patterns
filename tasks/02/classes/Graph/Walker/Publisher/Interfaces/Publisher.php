@@ -63,6 +63,17 @@ abstract class Publisher
 
 
   /**
+   * @param  Subscriber[]  $subscribers
+   *
+   * @return void
+   */
+  public function subscribeAll(array $subscribers): void
+  {
+    foreach ($subscribers as $subscriber) $this->subscribe($subscriber);
+  }
+
+
+  /**
    * @param  Subscriber  $subscriber
    *
    * @return void
@@ -75,13 +86,22 @@ abstract class Publisher
 
 
   /**
+   * @return void
+   */
+  public function unsubscribeAll(): void
+  {
+    foreach ($this->subscribers as $subscriber) $this->unsubscribe($subscriber);
+  }
+
+
+  /**
    * @param  string  $text
    *
    * @return void
    */
-  public function notify(string $text): void
+  public function publish(string $text): void
   {
-    foreach ($this->subscribers as $subscriber) $subscriber->receive($text);
+    foreach ($this->subscribers as $subscriber) $subscriber->read($text);
   }
 
 

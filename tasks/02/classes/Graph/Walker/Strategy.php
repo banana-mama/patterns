@@ -5,6 +5,7 @@ namespace classes\Graph\Walker;
 
 use classes\Graph\Graph;
 use classes\Graph\Walker\Iterator\Iterator;
+use classes\Graph\Walker\Publisher\Interfaces\Publisher;
 
 
 abstract class Strategy
@@ -20,11 +21,12 @@ abstract class Strategy
   /**
    * Strategy constructor.
    *
-   * @param  Graph  $graph
+   * @param  Graph           $graph
+   * @param  null|Publisher  $publisher
    */
-  function __construct(Graph $graph)
+  function __construct(Graph $graph, ?Publisher $publisher = null)
   {
-    $this->iterator = $this->getStrategyIterator($graph);
+    $this->iterator = $this->getStrategyIterator($graph, $publisher);
   }
 
 
@@ -56,11 +58,12 @@ abstract class Strategy
 
 
   /**
-   * @param  Graph  $graph
+   * @param  Graph           $graph
+   * @param  null|Publisher  $publisher
    *
    * @return Iterator
    */
-  abstract protected function getStrategyIterator(Graph $graph): Iterator;
+  abstract protected function getStrategyIterator(Graph $graph, ?Publisher $publisher = null): Iterator;
 
 
 }

@@ -4,6 +4,7 @@ namespace classes\Graph\Walker\Iterator;
 
 use classes\Graph\Graph;
 use classes\Graph\Node;
+use classes\Graph\Walker\Publisher\Interfaces\Publisher;
 
 
 abstract class Iterator
@@ -28,6 +29,11 @@ abstract class Iterator
    */
   protected $graph = null;
 
+  /**
+   * @var null|Publisher $publisher
+   */
+  protected $publisher = null;
+
 
   ### methods
 
@@ -35,13 +41,18 @@ abstract class Iterator
   /**
    * Iterator constructor.
    *
-   * @param  Graph  $graph
+   * @param  Graph           $graph
+   * @param  null|Publisher  $publisher
    */
-  public function __construct(Graph $graph)
+  public function __construct(Graph $graph, ?Publisher $publisher = null)
   {
+
+    if ($publisher) $this->publisher = $publisher;
+
     $this->graph = $graph;
     $graphRootNode = $this->graph->getRoot();
     if ($graphRootNode) $this->setNodeAsNext($graphRootNode);
+
   }
 
 
@@ -73,10 +84,20 @@ abstract class Iterator
    *
    * @return void
    */
-  protected function setNodeAsNext(Node $node): void {
+  protected function setNodeAsNext(Node $node): void
+  {
     $this->currentNode = $node;
     $this->currentNode->setAsVisited();
     $this->next = $this->currentNode->getValue();
+  }
+
+
+  /**
+   * @param  string  $text
+   */
+  protected function publish(string $text)
+  {
+    if ($this->publisher) $this->publisher->publish($text);
   }
 
 

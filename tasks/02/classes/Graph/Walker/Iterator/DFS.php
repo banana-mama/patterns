@@ -38,11 +38,7 @@ class DFS extends Iterator
     parent::__construct($graph);
 
     $graphRootNode = $this->graph->getRoot();
-    if ($graphRootNode) {
-      $this->currentNode = $graphRootNode;
-      $this->currentNode->setAsVisited();
-      $this->next = $graphRootNode->getValue();
-    }
+    if ($graphRootNode) $this->setNodeAsNext($graphRootNode);
 
   }
 
@@ -80,29 +76,47 @@ class DFS extends Iterator
    */
   private function setNext(Node $node): void
   {
+
+    # если имеются потомки - проверяем, были ли они уже посещены
+    # если нет - посещаем
     if ($node->hasChilds()) {
 
       $leftChild = $node->getChild('left');
-      if ($leftChild && ($leftChild->isVisited() === false)) {
-        $this->currentNode = $leftChild;
-        $this->currentNode->setAsVisited();
-        $this->next = $this->currentNode->getValue();
-      } else {
+      if ($leftChild && ($leftChild->isVisited() === false)) $this->setNodeAsNext($leftChild);
+      else {
 
         $rightChild = $node->getChild('right');
-        if ($rightChild && ($rightChild->isVisited() === false)) {
-          $this->currentNode = $rightChild;
-          $this->currentNode->setAsVisited();
-          $this->next = $this->currentNode->getValue();
-        }
-        elseif ($node->hasParent()) $this->setNext($node->getParent());
-        else $this->next = null;
+        if ($rightChild && ($rightChild->isVisited() === false)) $this->setNodeAsNext($rightChild);
+        else $toParent = true; # возвращаемся к родителю (флаг - логика ниже)
 
       }
 
+    } else $toParent = true; # возвращаемся к родителю (флаг - логика ниже)
+    ###
+
+    // --- // --- //
+
+    # если на текущем узле делать больше нечего - возвращаемся к родителю
+    # (данный узел уже исключен из дальнейшей проверки)
+    if (isset($toParent) && $toParent) {
+      if ($node->hasParent()) $this->setNext($node->getParent());
+      else $this->next = null;
     }
-    elseif ($node->hasParent()) $this->setNext($node->getParent());
-    else $this->next = null;
+    ###
+
+  }
+
+
+  /**
+   * @param  Node  $node
+   *
+   * @return void
+   */
+  private function setNodeAsNext(Node $node): void
+  {
+    $this->currentNode = $node;
+    $this->currentNode->setAsVisited();
+    $this->next = $this->currentNode->getValue();
   }
 
 

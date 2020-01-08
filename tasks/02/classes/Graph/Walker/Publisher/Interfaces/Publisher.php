@@ -56,8 +56,8 @@ abstract class Publisher
   {
     $subscriberKey = $subscriber->getKey();
     if (array_key_exists($subscriberKey, $this->subscribers) === false) {
-      $subscriber->subscribeTo($this);
       $this->subscribers[$subscriberKey] = $subscriber;
+      $subscriber->subscribeTo($this);
     }
   }
 

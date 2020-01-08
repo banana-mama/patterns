@@ -81,8 +81,8 @@ abstract class Subscriber
   {
     $publisherKey = $publisher->getKey();
     if (array_key_exists($publisherKey, $this->publishers) === false) {
-      $publisher->subscribe($this);
       $this->publishers[$publisherKey] = $publisher;
+      $publisher->subscribe($this);
     }
   }
 

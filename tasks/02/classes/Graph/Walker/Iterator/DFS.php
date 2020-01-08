@@ -34,11 +34,19 @@ class DFS extends Iterator
 
         $rightChild = $node->getChild('right');
         if ($rightChild && ($rightChild->isVisited() === false)) $this->setNodeAsNext($rightChild);
-        else $toParent = true; # возвращаемся к родителю (флаг - логика ниже)
+        else {
+          # возвращаемся к родителю (флаг - логика ниже)
+          $toParent = true;
+          $text = ('У узла \'' . $node->getValue() . '\' отсутствуют НЕПОСЕЩЕННЫЕ потомки!');
+        }
 
       }
 
-    } else $toParent = true; # возвращаемся к родителю (флаг - логика ниже)
+    } else {
+      # возвращаемся к родителю (флаг - логика ниже)
+      $text = ('Узел \'' . $node->getValue() . '\' не имеет потомков!');
+      $toParent = true;
+    }
     ###
 
     // --- // --- //
@@ -47,8 +55,7 @@ class DFS extends Iterator
     # (данный узел уже исключен из дальнейшей проверки)
     if (isset($toParent) && $toParent) {
 
-      $text = ('Узел \'' . $node->getValue() . '\' не имеет потомков!');
-      $this->publish($text);
+      $this->publish($text ?? 'error');
 
       if ($node->hasParent()) $this->setNext($node->getParent());
       else $this->next = null;

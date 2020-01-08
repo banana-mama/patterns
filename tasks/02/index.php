@@ -61,7 +61,7 @@ $walker = new Walker(new DFS($graph, $DFSpublisher)); ### в глубину (DFS
 $list = $walker->walk()->getList();
 
 
-###
+### ВЫВОД ДАННЫХ, ЗАВЕРШЕНИЕ СКРИПТА.
 
 
 //echo '<pre>';

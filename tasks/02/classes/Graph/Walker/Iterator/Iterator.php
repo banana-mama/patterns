@@ -34,9 +34,9 @@ abstract class Iterator
 
 
   /**
-   * @return Node
+   * @return null|integer
    */
-  abstract public function getNext(): Node;
+  abstract public function getNext(): ?int;
 
 
 }

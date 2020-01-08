@@ -40,8 +40,8 @@ $tree = [
 $graph = new Graph();
 $graph->injectTree($tree);
 
-$walker = new Walker(new BFS($graph));
-//$walker = new Walker(new DFS($graph));
+$walker = new Walker(new DFS($graph));
+//$walker = new Walker(new BFS($graph));
 
 $list = $walker->walk()->getList();
 
@@ -53,8 +53,8 @@ echo '<pre>';
 print_r($list);
 echo '</pre>';
 
-echo '<pre>';
-print_r($graph);
-echo '</pre>';
+//echo '<pre>';
+//print_r($graph);
+//echo '</pre>';
 
 exit();

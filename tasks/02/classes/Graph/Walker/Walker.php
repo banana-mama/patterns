@@ -2,7 +2,6 @@
 
 namespace classes\Graph\Walker;
 
-
 use classes\Graph\Graph;
 
 

@@ -14,12 +14,25 @@ class Node
   private $value = null;
 
   /**
+   * @var null|Node $parent
+   */
+  private $parent = null;
+
+  /**
    * @var null[]|Node[] $childs
    */
   private $childs = [
     'left' => null,
     'right' => null
   ];
+
+  /**
+   * @var boolean $visited
+   */
+  private $visited = false;
+
+
+  ### methods
 
 
   /**
@@ -29,7 +42,7 @@ class Node
    */
   function __construct(int $value)
   {
-    $this->value = $value;
+    $this->setValue($value);
   }
 
 
@@ -42,6 +55,9 @@ class Node
   }
 
 
+  ### public
+
+
   /**
    * @param  array  $tree
    *
@@ -50,7 +66,7 @@ class Node
   public function injectChilds(array $tree): void
   {
     foreach ($tree as $value => $childs) {
-      if (count(array_filter($this->childs)) === count($this->childs)) break;
+      if ($this->getChildsCount() === count($this->childs)) break; ### "потомки" уже существуют
 
       $node = new Node($value);
       if ($childs) $node->injectChilds($childs);
@@ -63,22 +79,78 @@ class Node
 
 
   /**
-   * @return null[]|Node[]
+   * @return boolean
    */
-  public function getChilds(): array
+  public function hasParent(): bool
   {
-    return $this->childs;
+    return !!$this->parent;
   }
 
 
   /**
-   * @param  array  $childs
+   * @return null|Node
+   */
+  public function getParent(): ?Node
+  {
+    return $this->parent;
+  }
+
+
+  /**
+   * @param  Node  $parent
    *
    * @return void
    */
-  public function setChilds(array $childs): void
+  public function setParent(Node $parent): void
   {
-    $this->childs = $childs;
+    $this->parent = $parent;
+  }
+
+
+  /**
+   * @return integer
+   */
+  public function getValue(): int
+  {
+    return $this->value;
+  }
+
+
+  /**
+   * @param  integer  $value
+   *
+   * @return void
+   */
+  public function setValue(int $value): void
+  {
+    $this->value = $value;
+  }
+
+
+  /**
+   * @return void
+   */
+  public function setAsVisited(): void
+  {
+    $this->visited = true;
+  }
+
+
+  /**
+   * @return boolean
+   */
+  public function isVisited(): bool
+  {
+    return $this->visited;
+  }
+
+
+  /**
+   * @return boolean
+   */
+  public function hasChilds(): bool
+  {
+    return ($this->getChildsCount() > 0);
   }
 
 
@@ -93,15 +165,47 @@ class Node
   }
 
 
+  ### private
+
+
+  /**
+   * @return null[]|Node[]
+   */
+  private function getChilds(): array
+  {
+    return $this->childs;
+  }
+
+
+  /**
+   * @param  array  $childs
+   *
+   * @return void
+   */
+  private function setChilds(array $childs): void
+  {
+    $this->childs = $childs;
+  }
+
+
+  private function getChildsCount()
+  {
+    return count(array_filter($this->childs));
+  }
+
+
   /**
    * @param  Node    $child
    * @param  string  $side
    *
    * @return void
    */
-  public function setChild(Node $child, string $side): void
+  private function setChild(Node $child, string $side): void
   {
-    if (array_key_exists($side, $this->childs)) $this->childs[$side] = $child;
+    if (array_key_exists($side, $this->childs)) {
+      $child->setParent($this);
+      $this->childs[$side] = $child;
+    }
   }
 
 

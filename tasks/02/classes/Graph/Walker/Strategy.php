@@ -38,8 +38,11 @@ abstract class Strategy
   {
     $list = [];
 
+    $count = 0;
     while ($this->iterator->hasNext()) {
+      if ($count === Walker::MAX_NODES) break;
       $list[] = $this->iterator->getNext();
+      $count++;
     }
 
     return $list;

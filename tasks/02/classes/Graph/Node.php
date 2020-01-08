@@ -165,16 +165,16 @@ class Node
   }
 
 
-  ### private
-
-
   /**
-   * @return null[]|Node[]
+   * @return Node[]
    */
-  private function getChilds(): array
+  public function getChilds(): array
   {
-    return $this->childs;
+    return array_filter($this->childs);
   }
+
+
+  ### private
 
 
   /**
@@ -190,7 +190,7 @@ class Node
 
   private function getChildsCount()
   {
-    return count(array_filter($this->childs));
+    return count($this->getChilds());
   }
 
 

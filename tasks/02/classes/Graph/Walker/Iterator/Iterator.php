@@ -83,6 +83,9 @@ abstract class Iterator
   ### abstract
 
 
+  # protected
+
+
   /**
    * @param  Node  $node
    *
